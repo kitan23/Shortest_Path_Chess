@@ -1,16 +1,16 @@
-CFLAGS=-Wall -Werror -Wfatal-errors 
+CFLAGS=-Wall -Werror -Wfatal-errors
 
 knight: knight.o tree.o queue.o
-	g++ -o knight knight.o tree.o queue.o 
+	g++ -o knight knight.o tree.o queue.o
 
-knight.o: knight.cc queue.cc tree.cc
-	g++ -c $(CFLAGS) knight.cc
+knight.o: knight.cpp queue.h tree.h
+	g++ -c $(CFLAGS) knight.cpp
 
-queue.o: queue.cc queue.h
-	g++ -c $(CFLAGS) queue.cc
+queue.o: queue.cpp queue.h
+	g++ -c $(CFLAGS) queue.cpp
 
-tree.o: tree.cc tree.h 
-	g++ -c $(CFLAGS) tree.cc
+tree.o: tree.cpp tree.h
+	g++ -c $(CFLAGS) tree.cpp
 
 clean:
-	rm -rf *.o knight 
+	rm -rf *.o knight
