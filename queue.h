@@ -10,8 +10,9 @@ class Queue
 public:
    Queue();
    void enqueue(const std::pair<int, int> item);
-   std::pair<int,int> dequeue();
+   Node* dequeue();
    bool empty() const;
+   void print() const; 
 private:
    Node* _head;
    Node* _tail;

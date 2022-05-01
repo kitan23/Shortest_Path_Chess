@@ -1,6 +1,7 @@
 #include "queue.h"
 #include <vector> // for children
 #include <utility> // for coordinates
+#include <iostream>
 
 Queue::Queue()
 {
@@ -32,20 +33,19 @@ void Queue::enqueue(const std::pair<int, int> item)
 * Dequeues an item i.e. removes it from the front of the queue
 * @return the data in the dequeued element if the queue is not empty
 */
-std::pair<int, int> Queue::dequeue()
+Node* Queue::dequeue()
 {
    Node* next_ptr = nullptr;
    if (!empty())
    {
-      std::pair<int,int> dequeued = _head->coords;
+      Node* dequeued = _head;
       next_ptr = _head->next;
-      delete _head; // deletes previous _head from memory
       _head = next_ptr;
       _size--;
       return dequeued;
    }
-   std::pair<int,int> invalid = std::make_pair(-1,-1);
-   return invalid;
+   
+   return nullptr;
 }
 
 bool Queue::empty() const
@@ -55,4 +55,22 @@ bool Queue::empty() const
       return true;
    }
    return false;
+}
+
+void Queue::print() const 
+{
+   if (_head == nullptr)
+   {
+      std::cout << "The queue is empty" << std::endl; 
+   }
+   else 
+   {
+      Node* cur = _head; 
+      while (cur != _tail)
+      {
+         std::cout << cur->coords.first << " " << cur->coords.second << std::endl; 
+         cur = cur->next; 
+      }
+      std::cout << cur->coords.first << " " << cur->coords.second << std::endl; 
+   }
 }
