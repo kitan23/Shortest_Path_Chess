@@ -11,12 +11,14 @@ int main()
    // look for destination node while initializing tree of possible moves
 
    //Initialize origin with user input as std::pair
-   std::cout << "Please enter a starting x coordinate on a 4x4 board: ";
-   int x;
-   std::cin >> x;
-   std::cout << "Please enter a starting y coordinate on a 4x4 board: ";
-   int y;
-   std::cin >> y;
+   // std::cout << "Please enter a starting x coordinate on a 4x4 board: ";
+   // int x;
+   // std::cin >> x;
+   // std::cout << "Please enter a starting y coordinate on a 4x4 board: ";
+   // int y;
+   // std::cin >> y;
+   int x = 0; 
+   int y = 0; 
    std::pair<int,int> origin = std::make_pair(x,y);
 
    //Initialize tree with root having origin

@@ -1,4 +1,4 @@
-CFLAGS=-Wall -Werror -Wfatal-errors
+CFLAGS=-Wall -Werror -Wfatal-errors -std=c++17
 
 knight: knight.o tree.o queue.o
 	g++ -o knight knight.o tree.o queue.o

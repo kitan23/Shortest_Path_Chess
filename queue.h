@@ -3,6 +3,7 @@
 
 #include <vector> // for children
 #include <utility> // for coordinates
+#include "node.h"
 
 class Queue
 {
@@ -12,12 +13,6 @@ public:
    std::pair<int,int> dequeue();
    bool empty() const;
 private:
-   struct Node
-   {
-      std::pair <int, int> coords;
-      Node* next;
-      Node* parent;
-   };
    Node* _head;
    Node* _tail;
    size_t _size;
