@@ -9,8 +9,10 @@ class Tree
 {
 public:
    Tree();
-   Tree(std::pair<int,int> coords);
+   Tree(Node* new_node);
    std::pair<int,int>get_root_coord();
+   void add_child(Node*& current, Node*& child); 
+   void print() const; 
 private:
    Node* _root;
 };

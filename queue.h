@@ -9,7 +9,7 @@ class Queue
 {
 public:
    Queue();
-   void enqueue(const std::pair<int, int> item);
+   void enqueue(Node* item);
    Node* dequeue();
    bool empty() const;
    void print() const; 

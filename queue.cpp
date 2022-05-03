@@ -14,9 +14,8 @@ Queue::Queue()
 * Enqueues an item i.e. adds it to the back of the queue
 * @param item: the data item that is going to be added to the queue
 */
-void Queue::enqueue(const std::pair<int, int> item)
+void Queue::enqueue(Node* new_node)
 {
-   Node* new_node = new Node{item, {}, nullptr}; // making node using coordinates
    if (empty())
    {
       _head = new_node;
@@ -35,12 +34,10 @@ void Queue::enqueue(const std::pair<int, int> item)
 */
 Node* Queue::dequeue()
 {
-   Node* next_ptr = nullptr;
    if (!empty())
    {
       Node* dequeued = _head;
-      next_ptr = _head->next;
-      _head = next_ptr;
+      _head = _head->next; 
       _size--;
       return dequeued;
    }
