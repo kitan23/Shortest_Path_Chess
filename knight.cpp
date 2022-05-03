@@ -1,4 +1,13 @@
-#include <utility>
+/**
+ * CS-102 Project 08: Finds the shortest path of a knight on a chess board from one point to another. Takes
+ * origin coordinates and destination coordinates as user input before finding the shortest path between the
+ * two positions on the board.
+ * @file knight.cpp
+ * @authors Kien Tran, Shraddha Datta
+ * @date May 03 2022
+ */
+
+#include <utility> // for coordinates
 #include <vector>
 #include <iostream>
 #include "tree.h"
@@ -12,7 +21,7 @@
  * @param a pair of coordinates indicating the position of the knight on the board
  * @return a vector of all possible coordinates where the knight can move to from current location
  */
-std::vector<std::pair<int, int>> find_possible_moves(std::pair<int, int> coords)
+std::vector<std::pair<int, int>> find_possible_moves(const std::pair<int, int> coords)
 {
    std::vector<std::pair<int, int>> pssble_moves;
    int x = coords.first;
@@ -38,30 +47,30 @@ std::vector<std::pair<int, int>> find_possible_moves(std::pair<int, int> coords)
       {
          pssble_moves.emplace_back(std::make_pair(x + 2, y - 1));
       }
-    }
-    if ((x - 1) > -1)
-    {
-         if ((y + 2) < DIMENSION_OF_BOARD)
-         {
-            pssble_moves.emplace_back(std::make_pair(x - 1, y + 2));
-         }
-         if ((y - 2) > -1)
-        {
-            pssble_moves.emplace_back(std::make_pair(x - 1, y - 2));
-        }
-    }
-    if ((x - 2) > -1)
-    {
-        if ((y + 1) < DIMENSION_OF_BOARD)
-        {
-            pssble_moves.emplace_back(std::make_pair(x - 2, y + 1));
-        }
-        if ((y - 1) > -1)
-        {
-            pssble_moves.emplace_back(std::make_pair(x - 2, y - 1));
-        }
-    }
-    return pssble_moves;
+   }
+   if ((x - 1) > -1)
+   {
+      if ((y + 2) < DIMENSION_OF_BOARD)
+      {
+         pssble_moves.emplace_back(std::make_pair(x - 1, y + 2));
+      }
+      if ((y - 2) > -1)
+      {
+         pssble_moves.emplace_back(std::make_pair(x - 1, y - 2));
+      }
+   }
+   if ((x - 2) > -1)
+   {
+      if ((y + 1) < DIMENSION_OF_BOARD)
+      {
+         pssble_moves.emplace_back(std::make_pair(x - 2, y + 1));
+      }
+      if ((y - 1) > -1)
+      {
+         pssble_moves.emplace_back(std::make_pair(x - 2, y - 1));
+      }
+   }
+   return pssble_moves;
 }
 
 /**
@@ -69,15 +78,16 @@ std::vector<std::pair<int, int>> find_possible_moves(std::pair<int, int> coords)
  * @param coordinates: a vector of pairs of coordinates
  * @return the reversed vector of pairs of coordinates
  */
-std::vector<std::pair<int,int>> reverse(std::vector<std::pair<int,int>> coordinates) {
+std::vector<std::pair<int,int>> reverse(std::vector<std::pair<int,int>> coordinates)
+{
    for (size_t ind = 0; ind < coordinates.size()/2; ind++)
    {
-     std::pair<int,int> start = coordinates[ind];
-     std::pair<int,int> temp = start;
-     coordinates[ind] = coordinates[coordinates.size()-ind - 1];
-     coordinates[coordinates.size()-ind - 1] = temp;
+      std::pair<int,int> start = coordinates[ind];
+      std::pair<int,int> temp = start;
+      coordinates[ind] = coordinates[coordinates.size()-ind - 1];
+      coordinates[coordinates.size()-ind - 1] = temp;
    }
-  return coordinates;
+   return coordinates;
 }
 
 
@@ -87,7 +97,7 @@ std::vector<std::pair<int,int>> reverse(std::vector<std::pair<int,int>> coordina
  * @param object: pair of integers whose contents are to be output
  * @return output: the output stream after it has been written to
  */
-std::ostream & operator<<(std::ostream & output, std::pair<int,int> object)
+std::ostream & operator<<(std::ostream & output, const std::pair<int,int> object)
 {
    output << object.first << " " << object.second << std::endl;
    return output;

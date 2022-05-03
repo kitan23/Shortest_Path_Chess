@@ -1,8 +1,14 @@
+// File for implementation of functions defined in class declaration of Queue
+
 #include "queue.h"
 #include <vector> // for children
 #include <utility> // for coordinates
 #include <iostream>
 
+/**
+ * No-argument constructor method that is automatically called when an object of this class is created,
+ * initializing attributes of the object
+ */
 Queue::Queue()
 {
    _head = nullptr;
@@ -11,9 +17,9 @@ Queue::Queue()
 }
 
 /**
-* Enqueues an item i.e. adds it to the back of the queue
-* @param item: the data item that is going to be added to the queue
-*/
+ * Enqueues an item i.e. adds it to the back of the queue
+ * @param item: the data item that is going to be added to the queue
+ */
 void Queue::enqueue(Node* new_node)
 {
    if (empty())
@@ -29,22 +35,26 @@ void Queue::enqueue(Node* new_node)
 }
 
 /**
-* Dequeues an item i.e. removes it from the front of the queue
-* @return the data in the dequeued element if the queue is not empty
-*/
+ * Dequeues an item i.e. removes it from the front of the queue
+ * @return the data in the dequeued element if the queue is not empty
+ */
 Node* Queue::dequeue()
 {
    if (!empty())
    {
       Node* dequeued = _head;
-      _head = _head->next; 
+      _head = _head->next;
       _size--;
       return dequeued;
    }
-   
    return nullptr;
 }
 
+/**
+ * Checks whether queue is empty or not
+ * @return whether _head is nullptr i.e. if there are no
+ * nodes in the queue
+ */
 bool Queue::empty() const
 {
    if (_head == nullptr)
@@ -52,22 +62,4 @@ bool Queue::empty() const
       return true;
    }
    return false;
-}
-
-void Queue::print() const 
-{
-   if (_head == nullptr)
-   {
-      std::cout << "The queue is empty" << std::endl; 
-   }
-   else 
-   {
-      Node* cur = _head; 
-      while (cur != _tail)
-      {
-         std::cout << cur->coords.first << " " << cur->coords.second << std::endl; 
-         cur = cur->next; 
-      }
-      std::cout << cur->coords.first << " " << cur->coords.second << std::endl; 
-   }
 }
