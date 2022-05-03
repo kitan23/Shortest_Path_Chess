@@ -1,3 +1,5 @@
+// Header file for declaration of class Queue
+
 #ifndef QUEUE_H
 #define QUEUE_H
 
@@ -12,7 +14,7 @@ public:
    void enqueue(Node* item);
    Node* dequeue();
    bool empty() const;
-   void print() const; 
+   void print() const;
 private:
    Node* _head;
    Node* _tail;

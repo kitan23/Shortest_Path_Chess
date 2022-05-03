@@ -1,3 +1,5 @@
+// Header file for declaration of class Tree
+
 #ifndef TREE_H
 #define TREE_H
 
@@ -8,11 +10,8 @@
 class Tree
 {
 public:
-   Tree();
    Tree(Node* new_node);
-   std::pair<int,int>get_root_coord();
-   void add_child(Node*& current, Node*& child); 
-   void print() const; 
+   void add_child(Node*& current, Node*& child);
 private:
    Node* _root;
 };
