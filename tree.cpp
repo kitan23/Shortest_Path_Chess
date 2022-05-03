@@ -3,7 +3,6 @@
 #include "tree.h"
 #include <utility> // for coordinates
 #include <vector> // for children
-#include <iostream>
 
 /**
  * Constructor method that is called when an object of this class is created and a new node is passed as an argument,

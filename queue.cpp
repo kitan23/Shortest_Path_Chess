@@ -3,7 +3,6 @@
 #include "queue.h"
 #include <vector> // for children
 #include <utility> // for coordinates
-#include <iostream>
 
 /**
  * No-argument constructor method that is automatically called when an object of this class is created,
