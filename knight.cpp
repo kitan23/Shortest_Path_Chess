@@ -5,8 +5,13 @@
 #include "queue.h"
 #include "node.h"
 
-int DIMENSION_OF_BOARD = 8; 
+#define DIMENSION_OF_BOARD 8
 
+/**
+ * Finds all possible and valid moves that a knight can make from a certain position on the board
+ * @param a pair of coordinates indicating the position of the knight on the board
+ * @return a vector of all possible coordinates where the knight can move to from current location
+ */
 std::vector<std::pair<int, int>> find_possible_moves(std::pair<int, int> coords)
 {
    std::vector<std::pair<int, int>> pssble_moves;
@@ -59,12 +64,36 @@ std::vector<std::pair<int, int>> find_possible_moves(std::pair<int, int> coords)
     return pssble_moves;
 }
 
-std::ostream & operator<<(std::ostream & output, std::pair<int,int> object)
-{
-   output << object.first << " " << object.second << std::endl; 
-   return output; 
+/**
+ * Reverses a vector of pairs of coordinates
+ * @param coordinates: a vector of pairs of coordinates
+ * @return the reversed vector of pairs of coordinates
+ */
+std::vector<std::pair<int,int>> reverse(std::vector<std::pair<int,int>> coordinates) {
+   for (size_t ind = 0; ind < coordinates.size()/2; ind++)
+   {
+     std::pair<int,int> start = coordinates[ind];
+     std::pair<int,int> temp = start;
+     coordinates[ind] = coordinates[coordinates.size()-ind - 1];
+     coordinates[coordinates.size()-ind - 1] = temp;
+   }
+  return coordinates;
 }
 
+
+/**
+ * Overloads operator << so that contents of a pair of integers can be output using std::cout
+ * @param output: the output stream to write to
+ * @param object: pair of integers whose contents are to be output
+ * @return output: the output stream after it has been written to
+ */
+std::ostream & operator<<(std::ostream & output, std::pair<int,int> object)
+{
+   output << object.first << " " << object.second << std::endl;
+   return output;
+}
+
+// Controls the operation of the program
 int main()
 {
    //Initialize origin with user input as std::pair
@@ -81,75 +110,47 @@ int main()
    std::cout << "Please enter your destination y coordinate on a " << DIMENSION_OF_BOARD << "x" << DIMENSION_OF_BOARD << " board: ";
    std::cin >> y;
    std::pair<int,int> destination_coords = std::make_pair(x,y);
-   Node* origin = new Node{origin_coords}; 
-   Node* destination = new Node{destination_coords}; 
-   Node* move = origin; 
+   Node* origin = new Node{origin_coords};
+   Node* destination = new Node{destination_coords};
+   Node* move = origin;
 
-   //Initialize tree with root having origin
+   // Initialize tree with root having origin
    Tree tr(origin);
 
-   //Initialize queue
+   // Initialize queue
    Queue q;
-   //Enqueue origin to queue
+   // Enqueue origin to queue
    q.enqueue(origin);
 
-   std::vector<std::pair<int,int>> possible_moves; 
+   std::vector<std::pair<int,int>> possible_moves;
+
+   // Breadth first initialization of tree until we find destination node
    while (move->coords != destination->coords)
    {
-      Node* current = q.dequeue(); 
-      move = current; 
-      possible_moves = find_possible_moves(current->coords); 
+      Node* current = q.dequeue();
+      move = current;
+      possible_moves = find_possible_moves(current->coords);
 
-      for (int child_index = 0; child_index < possible_moves.size(); child_index++)
+      for (size_t child_index = 0; child_index < possible_moves.size(); child_index++)
       {
-         Node* child_node = new Node{possible_moves[child_index], {}, current, nullptr}; 
-         tr.add_child(current, child_node); 
-         q.enqueue(child_node); 
+         Node* child_node = new Node{possible_moves[child_index], {}, current, nullptr};
+         tr.add_child(current, child_node);
+         q.enqueue(child_node);
       }
    }
 
-   std::vector<std::pair<int,int>> shortest_path; 
+   // Initialize vector shortest_path and store nodes from destination point to origin using parent pointer
+   std::vector<std::pair<int,int>> shortest_path;
    while (move != nullptr)
    {
-      shortest_path.push_back(move->coords); 
-      move = move->parent; 
+      shortest_path.push_back(move->coords);
+      move = move->parent;
    }
 
-   std::reverse(shortest_path.begin(), shortest_path.end()); 
+   // Reverse the vector shortest path and print its contents
+   shortest_path = reverse(shortest_path);
    for (std::pair<int,int> coords : shortest_path)
    {
-      std::cout << coords; 
+      std::cout << coords;
    }
 }
-
-
-
-// BREADTH FIRST INITIALIZATION OF TREE
-/*
-
-Initialize move with user input as node
-while (move != destination)
-{
-   Node* current = queue.dequeue()
-   find possible move and validate moves (function that returns vector v containing valid moves)
-   for (int ind = 0; ind < v; ind++)
-   {
-       if (possible move)
-       {
-         add to tree (where current is parent of possible move)
-         add to queue
-       }
-   }
-}*/
-
-// BACK TRAVERSAL
-/* Node* current = destination node that is found
-Initialize vector to store nodes that indicate shortest path
-while (current != nullptr) since the parent of root node is nullptr
-{
-   add current to vector
-   current = current->parent
-}
-reverse the vector and print the shortest path b/w origin and destination
-
-*/
