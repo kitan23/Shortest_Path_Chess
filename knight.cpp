@@ -80,12 +80,12 @@ std::vector<std::pair<int, int>> find_possible_moves(const std::pair<int, int> c
  */
 std::vector<std::pair<int,int>> reverse(std::vector<std::pair<int,int>> coordinates)
 {
-   for (size_t ind = 0; ind < coordinates.size()/2; ind++)
+   for (size_t ind = 0; ind < coordinates.size() / 2; ind++)
    {
       std::pair<int,int> start = coordinates[ind];
       std::pair<int,int> temp = start;
-      coordinates[ind] = coordinates[coordinates.size()-ind - 1];
-      coordinates[coordinates.size()-ind - 1] = temp;
+      coordinates[ind] = coordinates[coordinates.size() - ind - 1];
+      coordinates[coordinates.size() - ind - 1] = temp;
    }
    return coordinates;
 }
