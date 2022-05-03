@@ -14,7 +14,6 @@ public:
    void enqueue(Node* item);
    Node* dequeue();
    bool empty() const;
-   void print() const;
 private:
    Node* _head;
    Node* _tail;
