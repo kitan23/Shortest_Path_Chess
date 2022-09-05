@@ -6,7 +6,7 @@
 
 ## Instructions
 
-### Clone the repository then run these following commands
+### Clone the repository and run these following commands
 
   ```sh
   makefile 
